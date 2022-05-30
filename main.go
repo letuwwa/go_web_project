@@ -13,11 +13,22 @@ type User struct {
 	level     float64
 }
 
-func homePage(w http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(w, "Go is quite easy")
+func (user User) getAllInfo() string {
+	return fmt.Sprintf(
+		"User name is %s. He is %d y.o. and he has $%d",
+		user.name,
+		user.age,
+		user.money,
+	)
+}
+func (user *User) setNewName(newName string) {
+	user.name = newName
 }
 
-func contacts(w http.ResponseWriter, request *http.Request) {
+func homePage(writer http.ResponseWriter, request *http.Request) {
+	fmt.Fprintf(writer, "Go is quite easy")
+}
+func contacts(writer http.ResponseWriter, request *http.Request) {
 	testUser := User{
 		name:      "John",
 		age:       22,
@@ -25,7 +36,8 @@ func contacts(w http.ResponseWriter, request *http.Request) {
 		avgGrades: 12.3,
 		level:     22.3,
 	}
-	fmt.Fprintf(w, "User is "+testUser.name)
+	testUser.setNewName("test_user")
+	fmt.Fprintf(writer, testUser.getAllInfo())
 }
 
 func handleServer() {
