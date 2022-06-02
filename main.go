@@ -1,14 +1,7 @@
 package main
 
-import (
-	"go_web_project/pkg/db"
-	"log"
-	"net/http"
-)
+import "fmt"
 
 func main() {
-	db.Init()
-
-	log.Println("API is running!")
-	http.ListenAndServe(":4000", nil)
+	fmt.Println("Go!")
 }
