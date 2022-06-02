@@ -1,14 +1,24 @@
 package main
 
 import (
-	"go_web_project/pkg/db"
-	"log"
+	"fmt"
+	"html/template"
 	"net/http"
 )
 
-func main() {
-	db.Init()
+func index(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("templates/index.html")
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
+	t.ExecuteTemplate(w, "index", nil)
+}
 
-	log.Println("API is running!")
-	http.ListenAndServe(":4000", nil)
+func handleFunc() {
+	http.HandleFunc("/", index)
+	http.ListenAndServe("localhost:8081", nil)
+}
+
+func main() {
+	handleFunc()
 }
