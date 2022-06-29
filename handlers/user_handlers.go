@@ -14,7 +14,16 @@ func AddUser(c echo.Context) error {
 	}
 	result := config.DBInit().Create(&user)
 	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, "db operation fail")
+		return c.JSON(http.StatusBadRequest, config.DBOperationError)
 	}
 	return c.JSON(http.StatusOK, user)
+}
+
+func GetUsers(c echo.Context) error {
+	var records []models.User
+	result := config.DBInit().Find(&records)
+	if result.Error != nil {
+		return c.JSON(http.StatusBadRequest, config.DBOperationError)
+	}
+	return c.JSON(http.StatusOK, records)
 }
