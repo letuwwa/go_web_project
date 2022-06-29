@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db.Init()
+	config.DBInit()
 
 	e := echo.New()
 	e.GET("/", handlers.Hello)
