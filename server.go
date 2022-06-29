@@ -4,10 +4,12 @@ import (
 	"github.com/labstack/echo/v4"
 	"go_web_project/config"
 	"go_web_project/handlers"
+	"go_web_project/models"
 )
 
 func main() {
-	config.DBInit()
+	db := config.DBInit()
+	db.AutoMigrate(&models.User{})
 
 	e := echo.New()
 	e.GET("/", handlers.Index)

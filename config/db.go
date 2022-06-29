@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"go_web_project/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -22,7 +21,6 @@ func DBInit() *gorm.DB {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	db.AutoMigrate(&models.User{})
 	return db
 }
 
