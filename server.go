@@ -11,6 +11,7 @@ func main() {
 
 	e := echo.New()
 	e.GET("/", handlers.Hello)
+	e.POST("/user", handlers.AddUser)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
