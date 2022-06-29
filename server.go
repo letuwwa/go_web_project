@@ -10,7 +10,7 @@ func main() {
 	config.DBInit()
 
 	e := echo.New()
-	e.GET("/", handlers.Hello)
+	e.GET("/", handlers.Index)
 	e.POST("/user", handlers.AddUser)
 
 	e.Logger.Fatal(e.Start(":1323"))
