@@ -14,7 +14,7 @@ func AddUser(c echo.Context) error {
 	}
 	result := config.DBInit().Create(&user)
 	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, config.DBOperationError)
+		return c.JSON(http.StatusBadRequest, config.Response{Message: config.DBOperationError})
 	}
 	return c.JSON(http.StatusOK, user)
 }
@@ -23,7 +23,7 @@ func GetUsers(c echo.Context) error {
 	var records []models.User
 	result := config.DBInit().Find(&records)
 	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, config.DBOperationError)
+		return c.JSON(http.StatusBadRequest, config.Response{Message: config.DBOperationError})
 	}
 	return c.JSON(http.StatusOK, records)
 }
@@ -33,7 +33,7 @@ func GetUserByID(c echo.Context) error {
 	var user models.User
 	result := config.DBInit().First(&user, "id = ?", id)
 	if result.Error != nil {
-		return c.JSON(http.StatusNotFound, config.DBOperationError)
+		return c.JSON(http.StatusNotFound, config.Response{Message: config.DBEntityNotFund})
 	}
 	return c.JSON(http.StatusOK, user)
 }
