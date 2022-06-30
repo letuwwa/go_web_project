@@ -27,3 +27,13 @@ func GetUsers(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, records)
 }
+
+func GetUserByID(c echo.Context) error {
+	id := c.Param("id")
+	var user models.User
+	result := config.DBInit().First(&user, "id = ?", id)
+	if result.Error != nil {
+		return c.JSON(http.StatusNotFound, config.DBOperationError)
+	}
+	return c.JSON(http.StatusOK, user)
+}

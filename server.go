@@ -15,6 +15,7 @@ func main() {
 	e.GET("/", handlers.Index)
 	e.POST("/user", handlers.AddUser)
 	e.GET("/user", handlers.GetUsers)
+	e.GET("/user/:id", handlers.GetUserByID)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
