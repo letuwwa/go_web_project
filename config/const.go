@@ -8,3 +8,7 @@ const (
 type Response struct {
 	Message string `json:"message"`
 }
+
+type ResponseDeleted struct {
+	IsDeleted bool `json:"is_deleted"`
+}

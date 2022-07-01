@@ -37,3 +37,12 @@ func GetUserByID(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, user)
 }
+
+func DeleteUserByID(c echo.Context) error {
+	id := c.Param("id")
+	result := config.DBInit().Delete(&models.User{}, "id = ?", id)
+	if result.Error != nil {
+		return c.JSON(http.StatusNotFound, config.ResponseDeleted{IsDeleted: false})
+	}
+	return c.JSON(http.StatusOK, config.ResponseDeleted{IsDeleted: true})
+}
