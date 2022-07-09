@@ -7,23 +7,6 @@ import (
 	"net/http"
 )
 
-func AddUser(c echo.Context) error {
-	user := new(models.User)
-	if err := c.Bind(user); err != nil {
-		return c.JSON(http.StatusBadRequest, err)
-	}
-	var password, err = config.HashPassword(user.Password)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, config.Response{Message: config.HashOperationError})
-	}
-	user.Password = password
-	result := config.DBInit().Create(&user)
-	if result.Error != nil {
-		return c.JSON(http.StatusBadRequest, config.Response{Message: config.DBOperationError})
-	}
-	return c.JSON(http.StatusOK, user)
-}
-
 func GetUsers(c echo.Context) error {
 	var records []models.User
 	result := config.DBInit().Find(&records)
