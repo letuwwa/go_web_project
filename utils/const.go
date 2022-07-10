@@ -10,6 +10,7 @@ const (
 	JWTOperationError  = "jwt_operation_error"
 	LoginError         = "login_error"
 	LoginSuccess       = "login_success"
+	Forbidden          = "forbidden"
 )
 
 var JWTSalt = os.Getenv("JWTSalt")
