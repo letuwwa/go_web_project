@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func TestMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+func AuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		JWTToken := c.Request().Header["Token"]
 		if len(JWTToken) == 0 {

@@ -13,13 +13,11 @@ func main() {
 	db.AutoMigrate(&models.User{})
 
 	e := echo.New()
-	e.GET("/", handlers.Index, middleware.TestMiddleware)
-	e.GET("/user", handlers.GetUsers)
-	e.GET("/user/:id", handlers.GetUserByID)
-	e.DELETE("/user/:id", handlers.DeleteUserByID)
+	e.GET("/", handlers.Index)
+	e.GET("/user/:id", handlers.GetUserByID, middleware.AuthMiddleware)
 
-	e.POST("/auth", handlers.AuthRegister)
 	e.POST("/auth/login", handlers.AuthLogin)
+	e.POST("/auth/register", handlers.AuthRegister)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
