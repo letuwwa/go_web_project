@@ -1,4 +1,4 @@
-package config
+package utils
 
 const (
 	DBOperationError   = "db_operation_error"
