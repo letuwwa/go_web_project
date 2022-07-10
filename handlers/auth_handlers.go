@@ -46,5 +46,9 @@ func AuthLogin(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusForbidden, utils.Response{Status: utils.LoginError})
 	}
-	return c.JSON(http.StatusOK, utils.Response{Status: utils.LoginSuccess})
+	JWTToken, err := utils.GenerateJWT(DBUser.Username)
+	if err != nil {
+		return c.JSON(http.StatusForbidden, utils.Response{Status: utils.JWTOperationError})
+	}
+	return c.JSON(http.StatusOK, utils.ResponseWithString{Status: utils.LoginSuccess, Value: JWTToken})
 }
