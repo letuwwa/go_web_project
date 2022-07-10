@@ -7,5 +7,5 @@ import (
 )
 
 func Index(c echo.Context) error {
-	return c.JSON(http.StatusOK, config.Response{Message: "index page"})
+	return c.JSON(http.StatusOK, config.Response{Status: "index page"})
 }

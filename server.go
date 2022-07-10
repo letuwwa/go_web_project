@@ -17,7 +17,7 @@ func main() {
 	e.GET("/user/:id", handlers.GetUserByID)
 	e.DELETE("/user/:id", handlers.DeleteUserByID)
 
-	e.POST("/auth", handlers.RegisterUser)
+	e.POST("/auth", handlers.AuthRegister)
 	e.POST("/auth/login", handlers.AuthLogin)
 
 	e.Logger.Fatal(e.Start(":1323"))
